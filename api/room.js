@@ -36,7 +36,12 @@ export default async function handler(req, res) {
     res.status(429).json({ error: 'Too many requests. Wait a moment and try again.' });
     return;
   }
-  let body = req.body;
+  let body;
+  try {
+    body = req.body; // Vercel parses JSON here, and throws if it's garbled
+  } catch {
+    body = null;
+  }
   if (typeof body === 'string') {
     try {
       body = JSON.parse(body || '{}');

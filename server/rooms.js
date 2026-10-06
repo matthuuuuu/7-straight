@@ -326,7 +326,7 @@ export async function handle(body, now = Date.now(), meta = {}) {
   } catch (err) {
     console.error(err);
     if (err instanceof StoreError) {
-      return fail(503, 'The online-rooms database isn’t answering. It may have used up its free monthly limit, or been paused after a month without use. (Owner: see “If online rooms stop working” in DEPLOY.md.) You can still play on this device.');
+      return fail(503, 'The online-rooms database isn’t answering. It may have used up its free monthly limit, or been removed after a month without any games. (Owner: see “If online rooms stop working” in DEPLOY.md.) You can still play on this device.');
     }
     return fail(500, 'Something went wrong on the server. Try again in a moment.');
   }

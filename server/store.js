@@ -25,11 +25,28 @@ if (redis.call('GET', KEYS[2]) or '0') == ARGV[1] then
 end
 return 0`;
 
-function redisConfig() {
-  const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+function redisConfig(env = process.env) {
+  let url = env.KV_REST_API_URL || env.UPSTASH_REDIS_REST_URL;
+  let token = env.KV_REST_API_TOKEN || env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) {
+    // Connected with a "Custom Prefix" in Vercel (e.g. STORAGE_KV_REST_API_URL)?
+    // Find the matching pair anyway.
+    const pairs = [['KV_REST_API_URL', 'KV_REST_API_TOKEN'], ['REDIS_REST_URL', 'REDIS_REST_TOKEN']];
+    for (const key of Object.keys(env)) {
+      for (const [u, t] of pairs) {
+        if (!key.endsWith(`_${u}`)) continue;
+        const prefix = key.slice(0, -u.length);
+        if (env[key] && env[prefix + t]) {
+          url = env[key];
+          token = env[prefix + t];
+        }
+      }
+    }
+  }
   return url && token ? { url: url.replace(/\/$/, ''), token } : null;
 }
+
+export { redisConfig as _redisConfigForTests };
 
 function redisStore({ url, token }) {
   async function command(...args) {
