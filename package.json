@@ -1,0 +1,26 @@
+{
+  "name": "seven-straight",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A push-your-luck card game for 1-8 players, playable online from everyone's own phone.",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview --host",
+    "test": "node --test \"tests/*.test.js\""
+  },
+  "dependencies": {
+    "@fontsource/overpass": "^5.3.0",
+    "@fontsource/roboto": "^5.3.0",
+    "@fontsource/roboto-condensed": "^5.3.0",
+    "lucide-react": "^1.48.0",
+    "qrcode-generator": "^2.0.4",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "vite": "^8.3.1"
+  }
+}

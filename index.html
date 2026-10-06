@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" data-theme="cream">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>7 Straight</title>
+    <meta name="description" content="A push-your-luck card game for 1 to 8 players. Flip cards, don't bust, play from your own phone." />
+    <meta name="theme-color" content="#fbf3d6" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="7 Straight" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <script>
+      // Apply the saved theme before the page paints (no flash of the wrong colors).
+      try {
+        var t = JSON.parse(localStorage.getItem('lucky7.theme'));
+        if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'cream';
+        document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
