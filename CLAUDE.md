@@ -4,8 +4,8 @@
 storage keys and the `lucky` field for the seven-numbers bonus keep the old
 name on purpose, so saved games and settings survive.)
 
-The owner does not code. Explain changes in plain language, keep them small,
-run `npm test` and check the change in the browser before calling it done.
+Explain changes in plain language, keep them small, run `npm test` and check
+the change in the browser before calling it done.
 
 ## Architecture
 
